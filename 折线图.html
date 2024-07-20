@@ -8,22 +8,46 @@
     <script src="echarts.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.2/theme/vintage.min.js"></script>
     <style>
-    
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 使用视口高度单位 */
+            width: 100vw; /* 使用视口宽度单位 */
+            position: relative; /* 添加相对定位 */
+        }
+        
         #stress {
-            position: absolute;
-           /* top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;*/
-           /* margin: auto;*/
-            width: 100%;
-            height: 100%;
+            width: 80%; /* 减小宽度，避免与按钮重叠 */
+            height: 80vh; /* 使用视口高度单位 */
+        }
+        
+        /* 暗流按钮样式 */
+        #initChart {
+            position: fixed;
+            bottom: 20px; /* 距离底部 20px */
+            right: 20px; /* 距离右边 20px */
+            padding: 10px 20px;
+            background-color: #007bff; /* 背景颜色 */
+            color: #fff; /* 文字颜色 */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000; /* 确保按钮在所有其他元素之上 */
+        }
+
+        #initChart:hover {
+            background-color: #0056b3; /* 悬停时的背景颜色 */
         }
     </style>
 </head>
 <body>
-    <!-- 创建一个用于放置图表的 DOM 容器 -->
-    <div id="stress"></div>
+    <div class="container">
+        <!-- 创建一个用于放置图表的 DOM 容器 -->
+        <div id="stress"></div>
+    </div>
+    <!-- 添加按钮 -->
+    <button id="initChart">显示图表</button>
     <script>
         // X 轴数据（时间）
         var years = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
@@ -148,11 +172,11 @@
             series: series
         };
 
-       // var chart = echarts.init(document.getElementById('stress'));
-        var chart = echarts.init(document.getElementById('stress'), 'vintage'); // 指定使用vintage主题
-        chart.setOption(option);
-
-  
+        document.getElementById('initChart').addEventListener('click', function() {
+            console.log('Button clicked'); // 添加调试信息
+            var chart = echarts.init(document.getElementById('stress'), 'vintage'); // 指定使用vintage主题
+            chart.setOption(option);
+        });
     </script>
 </body>
 </html>
